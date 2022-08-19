@@ -1,4 +1,4 @@
-version: '3'
+version: "3.9"
 services:
   node:
     restart: always
@@ -8,16 +8,16 @@ services:
     volumes:
       - ./:/code
   mongo:
-    image: mongo
-    container_name: profile_mongodb
+    image: mongo:5.0.10
+    restart: always
     environment:
-      - MONGO_INTIDB_DATABASE=profiles
-      - MONGO_INTIDB_ROOT_USERNAME=setup
-      - MONGO_INTIDB_ROOT_PASSWORD=allyourbasearebelongtous
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      #MONGO_INITDB_DATABASE: admin
     ports:
       - 27017:27017
     volumes:
-      - mongodb:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongodb.js:ro
-volumes:
- mongodb:
+      #- mongodb:/data/db
+#volumes:
+  #mongodb:

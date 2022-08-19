@@ -15,6 +15,14 @@ Demonstration user profile service in NodeJS
 npm install -d
 npm install mongodb
 
+
+
+## docker-compose mongodb
+
+docker exec -it usernode-mongo-1 bash
+mongo -u setup -p allyourbasearebelongtous --authenticationDatabase profiles
+
+
 ## standalone monogdb
 
 brew tap mongodb/brew
