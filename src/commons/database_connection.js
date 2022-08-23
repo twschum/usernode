@@ -1,6 +1,5 @@
-var mysql = require("mysql");
 const Logger = require("./../utils/logger");
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
 /**
  * DatabaseConnection is the database worker class for the application.
@@ -13,16 +12,23 @@ module.exports = class DatabaseConnection {
     }
     this._logger = new Logger("database_connection").getLogger();
 
-    const dburi = `mongodb+srv://${global.conf.mongo.user}:${global.conf.mongo.password}@${global.conf.mongo.host}:${global.conf.mongo.port}`;
-    MongoClient.connect(
-      dburi,
+    let dburi = new URL("mongodb://localhost");
+    dburi.protocol = "mongodb";
+    dburi.hostname = global.conf.mongo.host;
+    dburi.port = global.conf.mongo.port;
+    dburi.username = global.conf.mongo.user;
+    dburi.password = global.conf.mongo.password;
+    dburi.search = "retryWrites=true";
+
+    this._logger.info(dburi.toString());
+    mongoose.connect(
+      dburi.toString(),
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
       function (err, database) {
         if (err) {
-          this._logger.error("Error in connection database ", err);
           throw err;
         }
         this._db = database;
@@ -30,12 +36,6 @@ module.exports = class DatabaseConnection {
     );
 
     DatabaseConnection.instance = this;
-  }
-
-  addUser({user})
-
-  readUser(uid) {
-    this._db.collection("profile").find({})
   }
 
   _getConnection(cb, query, groupBy) {
@@ -84,5 +84,4 @@ module.exports = class DatabaseConnection {
       });
     });
   }
-
 };

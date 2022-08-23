@@ -1,13 +1,44 @@
+const mongoose = require("mongoose");
 
-const Joi = require('joi');
+const UserSchema = new mongoose.Schema({
+  pid: {
+    type: String,
+    required: true,
+  },
+  name: {
+    first: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    last: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+  },
+  interests: [
+    {
+      type: String,
+      trim: true,
+    },
+  ],
+  geolocation: {
+    latitude: {
+      type: Number,
+    },
+    longitude: {
+      type: Number,
+    },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+  },
+});
 
-module.exports = class UserSchema {
-    static getSchema() {
-        throw new Error("Not implemented method");
-        // return Joi.object().keys({
-        //     name: Joi.string().required().max(150),
-        //     email: Joi.string().max(250),
-        //     age: Joi.number().required()
-        // });
-    }
-};
+const User = mongoose.model("User", UserSchema);
+
+module.exports = User;

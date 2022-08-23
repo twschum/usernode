@@ -1,12 +1,12 @@
 const http = require("http");
 const express = require("express");
-const helmet = require("helmet");
+//const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const log4js = require("log4js");
 const listEndpoints = require("express-list-endpoints");
 const Logger = require("./src/utils/logger");
 const DatabaseConnection = require("./src/commons/database_connection");
-const ConfigManager = require('./src/utils/config_manager');
+const ConfigManager = require("./src/utils/config_manager");
 
 /**
  * The server.
@@ -55,8 +55,8 @@ class Server {
    *  Load Configuration from conf json
    */
   loadConfiguration() {
-    const configManager = new ConfigManager()
-    global.conf = configManager.getConfigurations()
+    const configManager = new ConfigManager();
+    global.conf = configManager.getConfigurations();
   }
 
   /**
@@ -71,14 +71,14 @@ class Server {
       log4js.connectLogger(Logger.getHttpLogger(), {
         level: "INFO",
         format:
-          "[:method :status :url - :response-timems :res[content-length]] - [:req[Host] :req[x-forwarded-for] - :remote-addr] - [HTTP/:http-version - :user-agent]"
+          "[:method :status :url - :response-timems :res[content-length]] - [:req[Host] :req[x-forwarded-for] - :remote-addr] - [HTTP/:http-version - :user-agent]",
       })
     );
     this.app.use(bodyParser.json({ limit: "20mb" }));
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
     // security related configurations
-    this.app.use(helmet());
+    //this.app.use(helmet());
     this.app.use(this.configureOptionsMethod);
 
     process.on("unhandledRejection", (reason, p) => {
@@ -105,7 +105,7 @@ class Server {
    */
   registerAPIRoutes() {
     this._router = require("./src/apis/index");
-    this._router.setRoutes(this.app);    
+    this._router.setRoutes(this.app);
   }
 
   prettyPrintRegisteredRoutes() {
@@ -113,7 +113,7 @@ class Server {
     this._logger.info(``);
     this._logger.info(`REGISTERED ROUTES:`);
 
-    routesToPrint.forEach(r => {
+    routesToPrint.forEach((r) => {
       this._logger.info(r.path.replace("\\", ""));
       this._logger.info("\t- " + r.methods.join(" | "));
     });
@@ -128,7 +128,7 @@ class Server {
     this.express_server = this.server.listen(this.port);
 
     // add error handler
-    this.server.on("error", error => {
+    this.server.on("error", (error) => {
       if (error.syscall !== "listen") {
         throw error;
       }
@@ -163,6 +163,6 @@ class Server {
 
 // Bootstrap the server
 const server = Server.bootstrap();
-//required for testing 
+//required for testing
 exports.express_server = server.express_server;
 exports.app = server.app;
