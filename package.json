@@ -1,36 +1,24 @@
 {
-  "name": "entity-service",
+  "name": "usernode",
   "version": "1.0.0",
-  "description": "This is a starter template for a NodeJs REST service",
+  "description": "Demonstration user profile service in NodeJS",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "api": "node api_gen",
-    "test": "jest --forceExit --runInBand --detectOpenHandles --verbose"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "scetiner",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twschum/usernode.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twschum/usernode/issues"
+  },
+  "homepage": "https://github.com/twschum/usernode#readme",
   "dependencies": {
-    "await-to-js": "2.1.1",
-    "axios": "0.18.0",
-    "basic-auth": "^1.1.0",
-    "body-parser": "1.18.3",
-    "express": "4.16.4",
-    "express-list-endpoints": "^4.0.0",
-    "helmet": "3.16.0",
-    "joi": "14.3.1",
-    "lodash": "4.17.11",
-    "log4js": "4.0.2",
-    "mongodb": "^4.9.0",
-    "mysql": "2.16.0",
-    "uuid": "3.3.2"
-  },
-  "devDependencies": {
-    "jest": "24.5.0"
-  },
-  "jest": {
-    "testMatch": [
-      "**/*_test.js"
-    ]
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2"
   }
 }
