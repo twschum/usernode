@@ -26,5 +26,10 @@ module.exports = function FetchWeather(lat, long) {
 
   req.end();
 
-  return weather;
+  return {
+    city: weather.properties?.relativeLocation?.properties?.city,
+    state: weather.properties?.relativeLocation?.properties?.state,
+    // TODO this actually needs a follow up lookup
+    temperature: weather.properties?.relativeLocation?.properties?.temperature,
+  };
 };
