@@ -2,6 +2,14 @@
 
 Demonstration user profile service in NodeJS
 
+# Architecture
+
+- NodeJS REST API server using [ExpressJS](https://expressjs.com/)
+- Persistance layer backed by [MongodDB](https://www.mongodb.com/)
+- Live API fetch from api.weather.gov
+
+
+
 # Usage
 
 ## Build and run server
