@@ -8,7 +8,7 @@ Demonstration user profile service in NodeJS
 - Persistance layer backed by [MongodDB](https://www.mongodb.com/)
 - Live API fetch from api.weather.gov
 
-
+<img width="1133" alt="Screen Shot 2022-08-23 at 12 43 08 PM" src="https://user-images.githubusercontent.com/6528229/186215088-976b9371-06b9-44b7-8769-66fac4f5cbe5.png">
 
 # Usage
 
