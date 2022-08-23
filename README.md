@@ -2,15 +2,26 @@
 
 Demonstration user profile service in NodeJS
 
-# Commands used:
+# Usage
+
+
+## Build and run server
 
 docker compose up --build
 
-npm install -d
-npm install mongodb
+## Interact with the server
 
-## docker-compose mongodb
+```
+curl 'localhost:8085/api/v1.0/user' -X GET
 
-docker exec -it usernode-mongo-1 bash
+
+curl 'localhost:8085/api/v1.0/user' -X POST -d '{"name":{"first": "Jane", "last": "Doe"}, "geolocation": {"latitude":42.436113,"longitude":-82.729413}}'
+
+```
+
+
+## exec to mongodb server
+
+docker exec -it usernode-mongo-1 mongo
 
 
